@@ -1,5 +1,8 @@
 # Multilingual News Source app
 
+## App located here
+https://ameliagoodson.github.io/Multilingual-news/
+
 ## Description
 
 This web application uses two news APIs to provide users
