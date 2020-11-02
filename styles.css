@@ -56,11 +56,11 @@ body {
 
 #weatherDiv {
 	padding: 10px;
-	background-color: rgb(223, 223, 223);
 	height: fit-content;
 	margin-left: 10px;
 	margin-right: 10px;
 	width: 25vw;
+	border: rgb(192, 190, 190) 1px solid;
 }
 
 #weatherSearchDiv {
@@ -75,6 +75,7 @@ body {
 }
 .conditionClass {
 	margin-top: 8px;
+	margin-left: 5px;
 }
 .iconClass {
 	background-color: white;

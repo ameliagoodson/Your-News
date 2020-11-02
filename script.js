@@ -12,30 +12,51 @@ var tempDiv = $('#tempDiv')
 var iconDiv = $('#iconDiv')
 var weatherAPIKey = "2c93b8b4f835efd50e9d4694052f2372"
 
-// Get user's geolocation to determine which local headlines to display
-function getLocation() {
-    if (navigator.location) {
-        navigator.geolocation.getCurrentPosition(success)
-     
+// Get user's geolocation to determine which local headlines to display and local weather
+window.onload =function () {
+    
+    if (navigator.geolocation) {
+    function success(position) {
+        var latitude = position.coords.latitude
+        var longitude = position.coords.longitude
+
+        convertCoords(latitude, longitude)
+        getForecast(latitude, longitude)
+        }
     }
     else {
-        console.log("Geolocation is not supported by this browser.")
+        console.log('geolocation not supported by browsers')
     }
-}
-function showPosition(success) { 
-    console.log("success")
-}
-getLocation()
+navigator.geolocation.getCurrentPosition(success)
+    }
 
-// Search local headlines using unofficial Google News API
-function searchLocalNews() {
-    var country = "" 
-    var geo = ""
+//convert user coordinates to address
+function convertCoords(latitude, longitude) {
+    console.log(latitude, longitude) 
+
+    var latlng = `${latitude}, ${longitude}`
+    var apiKey = "AIzaSyDyI5MQ5hTnh-zH-UuVGbih40E5JPQvhdI"
+    
+    $.ajax({
+        url: "https://maps.googleapis.com/maps/api/geocode/json?&latlng=" + latlng + "&key=" + apiKey,
+        method: "get"
+    }).then(function (response) {
+        var countryCode = response.results[0].address_components[5].short_name
+        
+        displayLocalNews(countryCode)
+    })
+}
+
+// Display local headlines using unofficial Google News API
+function displayLocalNews(countryCode) {
+    var country = countryCode
+    console.log(country)
+    var city = ""
     var language = ""
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://google-news.p.rapidapi.com/v1/geo_headlines?country=FR&geo=Paris&lang=fr",
+        "url": "https://google-news.p.rapidapi.com/v1/geo_headlines?country=" + country + "&geo=" + city + "&lang=" + language,
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "google-news.p.rapidapi.com",
@@ -63,8 +84,8 @@ function searchLocalNews() {
         }
         });
 }
-searchLocalNews() 
 
+// News search (taking in user input)
 $("#searchBtn").click(function () {
     clear()
     var searchTerm = input.val()
@@ -153,7 +174,7 @@ $("#searchBtn").click(function () {
 function clear() {
     $("#searchResults").empty()    
 }
-
+//Get coordinates for weather search
 function getCoordinates(addressSearch) {
     
     var address = addressSearch
@@ -174,6 +195,8 @@ function getCoordinates(addressSearch) {
     })
 }
 
+//Get weather forecast for user current city on page load
+
 function getForecast(latitude, longitude) {
    
     //Clear fields before search
@@ -192,7 +215,7 @@ function getForecast(latitude, longitude) {
     //Temperature
         var temperature = $('<p>')
         var tempRounded = Math.round(response.current.temp)
-        temperature.text(`${tempRounded} °C  `)
+        temperature.text(`${tempRounded} °C `)
         temperature.addClass("tempClass")
         $('#tempDiv').append(temperature)
     //Weather condition (description)
