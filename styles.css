@@ -8,7 +8,6 @@ body {
 #navbar {
 	width: 100vw;
 	margin-bottom: 1vh;
-	background-color: indigo;
 }
 #title {
 	width: 100vw;
@@ -66,6 +65,10 @@ body {
 #weatherSearchDiv {
 	width: 100%;
 	display: flex;
+}
+
+#weatherSearch {
+	width: 70%;
 }
 
 /* Weather */
