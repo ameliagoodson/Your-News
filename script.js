@@ -1,6 +1,7 @@
 var button = $("#searchBtn")
 var input = $("#input")
 var language = $('#language')
+var country = $('#country')
 var searchResultsDiv = $("#searchResults")
 
 var searchImg = $('#searchImg')
@@ -12,9 +13,11 @@ var tempDiv = $('#tempDiv')
 var iconDiv = $('#iconDiv')
 var weatherAPIKey = "2c93b8b4f835efd50e9d4694052f2372"
 
+
+
 // Get user's geolocation to determine which local headlines to display and local weather
 window.onload =function () {
-    
+    displayTrendingNews()
     if (navigator.geolocation) {
     function success(position) {
         var latitude = position.coords.latitude
@@ -32,8 +35,7 @@ navigator.geolocation.getCurrentPosition(success)
 
 //convert user coordinates to address
 function convertCoords(latitude, longitude) {
-    console.log(latitude, longitude) 
-
+    
     var latlng = `${latitude}, ${longitude}`
     var apiKey = "AIzaSyDyI5MQ5hTnh-zH-UuVGbih40E5JPQvhdI"
     
@@ -47,10 +49,9 @@ function convertCoords(latitude, longitude) {
     })
 }
 
-// Display local headlines using unofficial Google News API
+// Display local headlines on sidebar using unofficial Google News API (no images)
 function displayLocalNews(countryCode) {
     var country = countryCode
-    console.log(country)
     var city = ""
     var language = ""
     var settings = {
@@ -64,66 +65,171 @@ function displayLocalNews(countryCode) {
         }
     }
     $.ajax(settings).done(function (response) {
-        console.log(response);
 
         for (var i = 0; i < response.articles.length; i++) {
+        
         //Heading
             var title = $("<a>")
-            var lineBreak = $("<br>");
             title.text(response.articles[i].title)
+            title.addClass('articleHeading')
             title.attr("href", response.articles[i].link)
-            $('#searchResults').append(title)
-            $("#searchResults").append(lineBreak)
+            $("#searchResults").append(title)
+          
         //Publication date
             var date = $("<p>")
             dateStr = response.articles[i].published
             date = moment(dateStr).format("D MMMM YYYY")
+            date.className ='date'
             $("#searchResults").append(date);
-            $("#searchResults").append(lineBreak)
         ////No subheading or summary article available
         }
         });
 }
+// Trending news
+function displayTrendingNews() {
+    const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://webit-news-search.p.rapidapi.com/trending?language=en",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "3ff1283524msh220bfc89bcc77a5p1ff266jsnc3c75477f277",
+		"x-rapidapi-host": "webit-news-search.p.rapidapi.com"
+	}
+};
+
+$.ajax(settings).done(function (response) {
+    // console.log(response);
+    for (var i = 0; i < response.data.results.length; i++) {
+        function addSearchResults() {
+            //title
+            var title = $("<a>")
+            title.text(response.data.results[i].title)
+            title.attr("href", response.data.results[i].url)
+            title.addClass('articleHeading')
+            $('#localHeadlines').append(title)
+            //Publication date
+            var date = $("<p>")
+            dateStr = date.text(response.data.results[i].date)
+            date = moment(dateStr).format("D MMMM YYYY")
+            $('#localHeadlines').append(date);
+            //Image
+            var image = $("<img>", {
+                class: "newsImage"
+            })
+            image.attr('src', response.data.results[i].image)
+            $('#localHeadlines').append(image)
+        }
+                
+        addSearchResults()
+    }
+});
+}
+
+//Covid-19 news
+$('#covidBtn').click(function () {
+    clear()
+    covidNews()
+})
+
+var headingDiv = $('#headingDiv')
+
+function covidNews() {
+    const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://coronavirus-smartable.p.rapidapi.com/news/v1/global/",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "3ff1283524msh220bfc89bcc77a5p1ff266jsnc3c75477f277",
+		"x-rapidapi-host": "coronavirus-smartable.p.rapidapi.com"
+	}
+};
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+     for (var i = 0; i < response.news.length; i++) {
+                function addSearchResults() {
+                
+                //Heading
+                    headingDiv.text('COVID-19')
+                //Title
+                    var title = $("<a>")
+                    title.text(response.news[i].title)
+                    title.attr("href", response.news[i].originalUrl)
+                    title.addClass('articleHeading')
+                    $('#searchResults').append(title)
+                    
+                //Publication date
+                    var date = $("<p>")
+                    dateStr = date.text(response.news[i].publishedDateTime)
+                    date = moment(dateStr).format("D MMMM YYYY")
+                    $("#searchResults").append(date);
+                
+                //Excerpt
+                    var excerpt = $('<p>')
+                    excerpt.text(response.news[i].excerpt)
+                    $("#searchResults").append(excerpt)
+
+                //Subheading
+                    var image = $("<img>",{
+                        class: "newsImage"
+                    })
+                    image.attr('src', response.news[i].images[0].url)
+                    $('#searchResults').append(image)
+                }
+                addSearchResults()
+            }
+});
+}
+
 
 // News search (taking in user input)
 $("#searchBtn").click(function () {
     clear()
     var searchTerm = input.val()
     var languageSearch = language.val()
+    var countrySearch = country.val()
 
-    //Use Contextual News Search API if user selects English as it is a better source of English news
-    if (languageSearch === "en") {
+    //Use Webit News Search if user selects English as it is a better source of English news. 
+    if (languageSearch === "en" && !countrySearch) {
         const settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://rapidapi.p.rapidapi.com/api/search/NewsSearchAPI?pageSize=25&q=" + searchTerm + "&autoCorrect=true&pageNumber=1&toPublishedDate=null&fromPublishedDate=null",
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-                "x-rapidapi-key": "3ff1283524msh220bfc89bcc77a5p1ff266jsnc3c75477f277"
-            }
-        }
+	"async": true,
+	"crossDomain": true,
+	"url": "https://rapidapi.p.rapidapi.com/search?q=" + searchTerm + "&language=en",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "3ff1283524msh220bfc89bcc77a5p1ff266jsnc3c75477f277",
+		"x-rapidapi-host": "webit-news-search.p.rapidapi.com"
+	}
+};
+
+        
         $.ajax(settings).done(function (response) {
-            console.log(response);
-            for (var i = 0; i < response.value.length; i++) {
+          
+            for (var i = 0; i < response.data.results.length; i++) {
                 function addSearchResults() {
                 //Heading
                     var title = $("<a>")
-                    var lineBreak = $("<br>");
-                    title.text(response.value[i].title)
-                    title.attr("href", response.value[i].url)
+                    title.text(response.data.results[i].title)
+                    title.attr("href", response.data.results[i].url)
+                    title.addClass('articleHeading')
                     $('#searchResults').append(title)
-                    $("#searchResults").append(lineBreak)
+                    
                 //Publication date
                     var date = $("<p>")
-                    dateStr = response.value[i].datePublished
+                    dateStr = date.text(response.data.results[i].date)
                     date = moment(dateStr).format("D MMMM YYYY")
                     $("#searchResults").append(date);
                 //Subheading
-                    var subheading = $("<p>")
-                    subheading.text(response.value[i].description)
-                    $('#searchResults').append(subheading)
+                    var image = $("<img>",{
+                        class: "newsImage"
+                    })
+                    image.attr('src', response.data.results[i].image)
+                    console.log(image)
+                    $('#searchResults').append(image)
                 }
+                
                 addSearchResults()
             }
         });
@@ -134,8 +240,7 @@ $("#searchBtn").click(function () {
             "async": true,
             "crossDomain": true,
             "searchTerm": searchTerm,
-            "language": language,
-            "url": "https://rapidapi.p.rapidapi.com/v1/search?q=" + searchTerm + "&media=True&sort_by=relevancy&lang=" + languageSearch + "&page=1",
+            "url": "https://rapidapi.p.rapidapi.com/v1/search?q=" + searchTerm + "&media=True&sort_by=relevancy&lang=" + languageSearch + "&country=" + countrySearch + "&page=1",
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "newscatcher.p.rapidapi.com",
@@ -144,22 +249,25 @@ $("#searchBtn").click(function () {
         }
 
         $.ajax(settings).done(function (response) {
+            console.log(settings.url)
             console.log(response)
             for (var i = 0; i < response.articles.length; i++) {
                 function addSearchResults() {
-                    //Heading
+                //Heading
                     var title = $("<a>")
-                    var lineBreak = $("<br>");
                     title.text(response.articles[i].title)
                     title.attr("href", response.articles[i].link)
+                    title.addClass('articleHeading')
                     $('#searchResults').append(title)
-                    $("#searchResults").append(lineBreak)
-                    //Publication date
+                    
+                //Publication date
                     var date = $("<p>")
-                    dateStr = response.articles[i].published_date
+                    dateStr.text(response.articles[i].published_date)
                     date = moment(dateStr).format("D MMMM YYYY")
+                    date.className = 'date'
                     $("#searchResults").append(date);
-                    //Summary
+                    
+                //Summary
                     var summary = $("<p>")
                     summary.text(response.articles[i].summary)
                     $('#searchResults').append(summary)
@@ -170,6 +278,7 @@ $("#searchBtn").click(function () {
         })
     };
 })
+
 //Clear function for news search results
 function clear() {
     $("#searchResults").empty()    
@@ -196,7 +305,6 @@ function getCoordinates(addressSearch) {
 }
 
 //Get weather forecast for user current city on page load
-
 function getForecast(latitude, longitude) {
    
     //Clear fields before search

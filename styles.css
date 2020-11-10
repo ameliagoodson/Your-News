@@ -15,9 +15,7 @@ body {
 	font-size: 5vw;
 	text-align: center;
 	border-bottom: 1px grey solid;
-	background: -webkit-linear-gradient(#b4a9c2, #c7529a);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	font-family: "Prata", serif;
 }
 #logo {
 	height: 6vh;
@@ -28,8 +26,58 @@ body {
 	flex-direction: row;
 	height: 100vh;
 }
-
+/* Main nav */
+#mainNav {
+	list-style-type: none;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+}
+#mainNav li {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#mainNav li:hover {
+	cursor: pointer;
+}
 /* Side nav */
+#newsSearch {
+	text-align: center;
+	font-size: 22px;
+	padding-top: 10px;
+}
+
+#langBtnDiv {
+	width: 100%;
+	margin: 10px;
+}
+#inputDiv {
+	display: flex;
+}
+#input {
+	width: 90%;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	border: none;
+}
+#language {
+	height: 30px;
+	width: 70%;
+	margin-bottom: 10px;
+	border: none;
+}
+#country {
+	height: 30px;
+	width: 70%;
+	margin-bottom: 10px;
+	border: none;
+}
+#searchBtn {
+	min-width: fit-content;
+	border: none;
+}
+
 .sideNav {
 	background-color: rgb(223, 223, 223);
 	height: fit-content;
@@ -50,9 +98,28 @@ body {
 	width: 60vw;
 	border-left: rgb(192, 190, 190) solid 1px;
 	border-right: rgb(192, 190, 190) solid 1px;
+	border-top: rgb(192, 190, 190) solid 1px;
 	padding: 10px;
 }
+#headingDiv {
+	text-align: center;
+	font-size: 22px;
+}
+.articleHeading {
+	font-size: 20px;
+	color: black;
+	display: block;
+}
+.date {
+	margin-bottom: 10px;
+	color: rgb(194, 83, 102);
+}
 
+.newsImage {
+	/* height: 50px; */
+	width: 100%;
+}
+/* Weather */
 #weatherDiv {
 	padding: 10px;
 	height: fit-content;
@@ -61,17 +128,22 @@ body {
 	width: 25vw;
 	border: rgb(192, 190, 190) 1px solid;
 }
-
+#weatherTitle {
+	text-align: center;
+}
 #weatherSearchDiv {
 	width: 100%;
 	display: flex;
+}
+#localTitle {
+	text-align: center;
+	font-size: 22px;
 }
 
 #weatherSearch {
 	width: 70%;
 }
 
-/* Weather */
 .tempClass {
 	background-color: white;
 	margin-top: 8px;
