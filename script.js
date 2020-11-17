@@ -126,6 +126,20 @@ $.ajax(settings).done(function (response) {
 });
 }
 
+// Tech news
+$('#techBtn').click(function () {
+    clear()
+    techNews()
+})
+
+function techNews() {
+    var url = "http://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=6572f5d2ca9a4356abce93330e1ee7f5"
+   
+    $.ajax(url).then(function (response) {
+        console.log(response)
+    })
+}
+
 //Covid-19 news
 $('#covidBtn').click(function () {
     clear()
@@ -133,6 +147,7 @@ $('#covidBtn').click(function () {
 })
 
 var headingDiv = $('#headingDiv')
+var headingIcon = $('#headingIcon')
 
 function covidNews() {
     const settings = {
@@ -153,6 +168,11 @@ $.ajax(settings).done(function (response) {
                 
                 //Heading
                     headingDiv.text('COVID-19')
+                    var logo = $('<img>')
+                    logo.attr('src', './assets/wireless.svg')
+                    logo.addClass('logo')
+                    headingDiv.prepend(logo)
+                   
                 //Title
                     var title = $("<a>")
                     title.text(response.news[i].title)
@@ -172,12 +192,14 @@ $.ajax(settings).done(function (response) {
                     $("#searchResults").append(excerpt)
 
                 //Subheading
-                    var image = $("<img>",{
-                        class: "newsImage"
-                    })
-                    image.attr('src', response.news[i].images[0].url)
-                    $('#searchResults').append(image)
-                }
+                    if (response.news[i].images != null) {
+                    
+                        var image = $("<img>",{
+                            class: "newsImage"
+                        })
+                        image.attr('src', response.news[i].images[0].url)
+                        $('#searchResults').append(image)
+                }}
                 addSearchResults()
             }
 });
@@ -277,6 +299,16 @@ $("#searchBtn").click(function () {
          
         })
     };
+})
+
+//Display further search option when '+' button is clicked
+
+$('#btnMore').click(function () {
+    event.preventDefault()
+        $('#langBtnDiv').toggle()
+       
+        console.log('button check')
+
 })
 
 //Clear function for news search results

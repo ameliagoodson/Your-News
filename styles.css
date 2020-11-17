@@ -1,25 +1,35 @@
-/* Deep indigo: #4C168D */
-
-body {
-	height: 100%;
-	width: 100%;
+:root {
+	--lincolnGreen: #2a4d14;
+	--juneBud: #6dd8d8;
+	--terracotta: #e87a5e;
+}
+body,
+html {
+	height: 100vh;
+	width: 100vw;
 	margin: 0;
 }
+
 #navbar {
 	width: 100vw;
-	margin-bottom: 1vh;
+	background-image: url(./assets/rolled-up-newspaper.jpg);
+	background-position: right;
+	border-bottom: var(--lincolnGreen) solid 5px;
 }
 #title {
 	width: 100vw;
 	padding: 2vh 2vh;
 	font-size: 5vw;
 	text-align: center;
-	border-bottom: 1px grey solid;
 	font-family: "Prata", serif;
 }
-#logo {
+.logo,
+.logoNav {
 	height: 6vh;
 	margin-bottom: 10px;
+}
+.logo {
+	margin-right: 10px;
 }
 .flex-container {
 	display: flex;
@@ -32,20 +42,20 @@ body {
 	display: flex;
 	text-align: center;
 	justify-content: center;
+	background-color: var(--juneBud);
+	height: 6vh;
 }
 #mainNav li {
-	margin-left: 10px;
-	margin-right: 10px;
+	padding-top: 5px;
+	margin-left: 20px;
+	margin-right: 20px;
+	font-size: 18px;
 }
 #mainNav li:hover {
 	cursor: pointer;
+	color: white;
 }
 /* Side nav */
-#newsSearch {
-	text-align: center;
-	font-size: 22px;
-	padding-top: 10px;
-}
 
 #langBtnDiv {
 	width: 100%;
@@ -55,10 +65,10 @@ body {
 	display: flex;
 }
 #input {
-	width: 90%;
-	justify-content: center;
-	align-items: center;
-	margin: auto;
+	width: 70%;
+	height: 30px;
+	margin-left: 10px;
+	margin-bottom: 10px;
 	border: none;
 }
 #language {
@@ -73,9 +83,15 @@ body {
 	margin-bottom: 10px;
 	border: none;
 }
+
+#btnMore {
+	margin-left: 10px;
+	height: 30px;
+}
 #searchBtn {
 	min-width: fit-content;
 	border: none;
+	margin-bottom: 10px;
 }
 
 .sideNav {
@@ -96,9 +112,6 @@ body {
 /* Main */
 .main {
 	width: 60vw;
-	border-left: rgb(192, 190, 190) solid 1px;
-	border-right: rgb(192, 190, 190) solid 1px;
-	border-top: rgb(192, 190, 190) solid 1px;
 	padding: 10px;
 }
 #headingDiv {
@@ -116,8 +129,8 @@ body {
 }
 
 .newsImage {
-	/* height: 50px; */
-	width: 100%;
+	width: 50%;
+	margin-bottom: 40px;
 }
 /* Weather */
 #weatherDiv {
@@ -158,9 +171,32 @@ body {
 	width: 45px;
 }
 
-@media (max-width: 400px) {
+/* CSS Breakpoints */
+
+@media (max-width: 450px) {
 	#title {
 		font-size: 21px;
+	}
+	.main {
+		width: 100vw;
+		/* display: inline-block; */
+	}
+	#mainNav {
+		margin-bottom: 0px;
+	}
+	.sideNav {
+		width: 100vw;
+		margin: 0px;
+	}
+	.flex-container {
+		display: inline-block;
+		width: 100vw;
+		margin-top: 0px;
+		padding-top: 0px;
+	}
+
+	.sideNavList {
+		display: none;
 	}
 }
 
