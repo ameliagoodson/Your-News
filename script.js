@@ -205,6 +205,18 @@ $.ajax(settings).done(function (response) {
 });
 }
 
+// Conduct search on 'Enter' without pressing search btn
+
+// Execute a function when the user releases a key on the keyboard
+$('#input').keypress(function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    $("#searchBtn").click();
+  }
+});
 
 // News search (taking in user input)
 $("#searchBtn").click(function () {
@@ -248,7 +260,7 @@ $("#searchBtn").click(function () {
                         class: "newsImage"
                     })
                     image.attr('src', response.data.results[i].image)
-                    console.log(image)
+                    
                     $('#searchResults').append(image)
                 }
                 

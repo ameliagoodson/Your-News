@@ -122,6 +122,8 @@ html {
 	font-size: 20px;
 	color: black;
 	display: block;
+	font-weight: bold;
+	margin-top: 20px;
 }
 .date {
 	margin-bottom: 10px;
@@ -129,8 +131,9 @@ html {
 }
 
 .newsImage {
-	width: 50%;
+	width: 60%;
 	margin-bottom: 40px;
+	display: flex;
 }
 /* Weather */
 #weatherDiv {
@@ -197,6 +200,10 @@ html {
 
 	.sideNavList {
 		display: none;
+	}
+	#weatherDiv {
+		width: 100vw;
+		margin: 0px;
 	}
 }
 
