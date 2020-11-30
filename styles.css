@@ -12,16 +12,41 @@ html {
 
 #navbar {
 	width: 100vw;
-	background-image: url(./assets/rolled-up-newspaper.jpg);
-	background-position: right;
+	background-image: url(./assets/inkblotblank.jpg);
+	background-position: 40% 50%;
+	background-repeat: no-repeat;
 	border-bottom: var(--lincolnGreen) solid 5px;
 }
+@media (max-width: 550px) {
+	#navbar {
+		background-position: 40% 40%;
+	}
+}
+
+@media (max-width: 1300px) {
+	#navbar {
+		background-position: -150% 50%;
+	}
+}
+
+@media (max-width: 1600px) {
+	#navbar {
+		background-position: 55% 50%;
+	}
+}
+
+@media (min-width: 1601px) {
+	#navbar {
+		background-position: 60% 50%;
+	}
+}
+
 #title {
 	width: 100vw;
 	padding: 2vh 2vh;
-	font-size: 5vw;
+	font-size: 6vw;
 	text-align: center;
-	font-family: "Prata", serif;
+	color: white;
 }
 .logo,
 .logoNav {
@@ -125,9 +150,11 @@ html {
 	font-weight: bold;
 	margin-top: 20px;
 }
-.date {
-	margin-bottom: 10px;
-	color: rgb(194, 83, 102);
+.articleDate {
+	font-style: italic;
+}
+.articleText {
+	color: black;
 }
 
 .newsImage {
@@ -173,6 +200,9 @@ html {
 	height: 45px;
 	width: 45px;
 }
+.trendingImage {
+	width: 100%;
+}
 
 /* CSS Breakpoints */
 
@@ -186,6 +216,9 @@ html {
 	}
 	#mainNav {
 		margin-bottom: 0px;
+	}
+	.newsImage {
+		width: 100%;
 	}
 	.sideNav {
 		width: 100vw;

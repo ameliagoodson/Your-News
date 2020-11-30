@@ -14,6 +14,12 @@ var iconDiv = $('#iconDiv')
 var weatherAPIKey = "2c93b8b4f835efd50e9d4694052f2372"
 
 
+// Conduct local news search when clicking on website title
+$('#title').click(function () {
+    console.log('test')
+    clear()
+    displayLocalNews()
+})
 
 // Get user's geolocation to determine which local headlines to display and local weather
 window.onload =function () {
@@ -99,23 +105,32 @@ function displayTrendingNews() {
 };
 
 $.ajax(settings).done(function (response) {
-    // console.log(response);
+    
     for (var i = 0; i < response.data.results.length; i++) {
         function addSearchResults() {
-            //title
+
+            headingDiv.text('LOCAL HEADLINES')
+            var logo = $('<img>')
+            logo.attr('src', './assets/wireless.svg')
+            logo.addClass('logo')
+            headingDiv.prepend(logo)
+            
+        //Title
             var title = $("<a>")
             title.text(response.data.results[i].title)
             title.attr("href", response.data.results[i].url)
             title.addClass('articleHeading')
             $('#localHeadlines').append(title)
-            //Publication date
+
+        //Publication date
             var date = $("<p>")
             dateStr = date.text(response.data.results[i].date)
             date = moment(dateStr).format("D MMMM YYYY")
             $('#localHeadlines').append(date);
-            //Image
+        
+        //Image
             var image = $("<img>", {
-                class: "newsImage"
+                class: "trendingImage"
             })
             image.attr('src', response.data.results[i].image)
             $('#localHeadlines').append(image)
@@ -133,11 +148,79 @@ $('#techBtn').click(function () {
 })
 
 function techNews() {
-    var url = "http://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=6572f5d2ca9a4356abce93330e1ee7f5"
    
-    $.ajax(url).then(function (response) {
-        console.log(response)
-    })
+    $.ajax({
+        url: "http://api.mediastack.com/v1/news",
+        data: {
+            access_key: "432aeabac511cee8ef709bba3168a680",
+            categories: "technology",
+            languages: "en",
+            limit: "50"
+        }
+        
+    }).then(function (response) {
+            
+        // Filter out duplicates 
+        var array = response.data
+        
+        var obj = {}
+
+        for (var i = 0; i < 50; i++) {
+           
+                obj[array[i]['title']] = array[i];
+            
+        }
+        
+
+        var newArray = []
+        for (var key in obj) {
+            newArray.push(obj[key])
+        }    
+        
+         for (var i = 0; i < newArray.length; i++) {
+                
+            //Heading
+            headingDiv.text('TECHNOLOGY')
+            var logo = $('<img>')
+            logo.attr('src', './assets/wireless.svg')
+            logo.addClass('logo')
+            headingDiv.prepend(logo)
+                
+            // //Title
+            //  console.log(newArray[i].title)
+            var title = $("<a>")
+            title.text(newArray[i].title)
+            title.addClass('articleHeading')
+            $('#searchResults').append(title)
+            title.attr("href", newArray[i].url)
+
+            //Publication date
+
+             var date = $("<p>")   
+             dateStr = response.data[i].published_at
+            dateFormat = moment(dateStr).format("D MMMM YYYY")
+             date.text(dateFormat)
+             date.addClass('articleDate')
+            $("#searchResults").append(date)
+            
+            //Excerpt
+                var excerpt = $('<p>')
+                var excerptTxt = response.data[i].description
+                var replace = excerptTxt.replace(/&nbsp;/g, " ")
+                $("#searchResults").append(replace)
+
+                //Subheading
+                    if (response.data[i].image != null) {
+                    
+                        var image = $("<img>",{
+                            class: "newsImage"
+                        })
+                        image.attr('src', response.data[i].image)
+                        $('#searchResults').append(image)
+                    }         
+                 }
+             
+        })
 }
 
 //Covid-19 news
@@ -181,9 +264,10 @@ $.ajax(settings).done(function (response) {
                     $('#searchResults').append(title)
                     
                 //Publication date
-                    var date = $("<p>")
+                    var date = $(document.createElement('div')).attr('id', 'theID')
                     dateStr = date.text(response.news[i].publishedDateTime)
                     date = moment(dateStr).format("D MMMM YYYY")
+                    $('#theID').addClass('articleDate')
                     $("#searchResults").append(date);
                 
                 //Excerpt
@@ -325,7 +409,8 @@ $('#btnMore').click(function () {
 
 //Clear function for news search results
 function clear() {
-    $("#searchResults").empty()    
+    $("#searchResults").empty() 
+    $('#headingDiv').empty()
 }
 //Get coordinates for weather search
 function getCoordinates(addressSearch) {
@@ -363,7 +448,7 @@ function getForecast(latitude, longitude) {
         method: "GET",
         url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitudeVal + "&lon=" + longitudeVal + "&units=metric&exclude={part}&appid=" + weatherAPIKey
     }).then(function (response) {
-        console.log(response)
+        // console.log(response)
     //Temperature
         var temperature = $('<p>')
         var tempRounded = Math.round(response.current.temp)

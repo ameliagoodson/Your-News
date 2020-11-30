@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Search</title>
-    <!-- jQuery link -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
+    
     <!-- Moment JS link -->
     <!-- <script src="moment.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
@@ -24,7 +22,7 @@
 </head>
 <body>
     <nav id="navbar">
-        <h1 id="title" ><img class="logoNav" src="./assets/wireless.svg"> Your News </h1>
+        <h1 id="title" > Your News </h1>
     </nav>
     <nav>
         <ul id="mainNav">
@@ -42,7 +40,7 @@
                 <input type="text" id="input" placeholder="Search term">
                 <button id="btnMore">+</button>
             </div>
-            <div id="langBtnDiv">
+            <div id="langBtnDiv" style="display: none;">
                 <select id="language">
                     <option value="en" selected>Language</option>
                     <option value="ar">Arabic</option>
@@ -267,11 +265,6 @@
                 <button type="button" id="searchBtn">Search</button>
             </div>
         </form>
-        <ul class="sideNavList">
-            <li class="listItem">First link</li>
-            <li class="listItem">Second link</li>
-            <li class="listItem">Third link</li>
-        </ul>
     </div>             
     <div class="main">
         <h3 id="headingDiv"></h3>
@@ -295,7 +288,10 @@
         </div>
     </div>
 </div>
- 
+    
+    <!-- jQuery link -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 </html>
