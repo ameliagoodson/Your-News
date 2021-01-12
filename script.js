@@ -13,17 +13,20 @@ var tempDiv = $('#tempDiv')
 var iconDiv = $('#iconDiv')
 var weatherAPIKey = "2c93b8b4f835efd50e9d4694052f2372"
 
+// Display trending news on side bar upon page load
+window.onload = function () {
+    displayTrendingNews()
+    getCoords()
+    }
 
 // Conduct local news search when clicking on website title
 $('#title').click(function () {
-    console.log('test')
     clear()
-    displayLocalNews()
+    getCoords()  
 })
 
-// Get user's geolocation to determine which local headlines to display and local weather
-window.onload =function () {
-    displayTrendingNews()
+// Get user's geolocation upon page load to determine which local headlines to display and local weather
+function getCoords() {
     if (navigator.geolocation) {
     function success(position) {
         var latitude = position.coords.latitude
@@ -31,15 +34,16 @@ window.onload =function () {
 
         convertCoords(latitude, longitude)
         getForecast(latitude, longitude)
+        
         }
     }
     else {
         console.log('geolocation not supported by browsers')
     }
 navigator.geolocation.getCurrentPosition(success)
-    }
+}
 
-//convert user coordinates to address
+//convert user coordinates to address using Google maps API
 function convertCoords(latitude, longitude) {
     
     var latlng = `${latitude}, ${longitude}`
@@ -49,21 +53,29 @@ function convertCoords(latitude, longitude) {
         url: "https://maps.googleapis.com/maps/api/geocode/json?&latlng=" + latlng + "&key=" + apiKey,
         method: "get"
     }).then(function (response) {
-        var countryCode = response.results[0].address_components[5].short_name
         
-        displayLocalNews(countryCode)
+        var geoLocation = response.results[0].address_components[0].long_name
+        // console.log(geoLocation) working
+        displayLocalNews(geoLocation)
     })
 }
 
-// Display local headlines on sidebar using unofficial Google News API (no images)
-function displayLocalNews(countryCode) {
-    var country = countryCode
-    var city = ""
-    var language = ""
+// Display local headlines using unofficial Google News API (no images)
+function displayLocalNews(geoLocation) {
+    // console.log(geoLocation) working
+
+        //Header
+        headingDiv.text('LOCAL HEADLINES')
+        var logo = $('<img>')
+        logo.attr('src', './assets/wireless.svg')
+        logo.addClass('logo')
+        headingDiv.prepend(logo)
+
     var settings = {
+        
         "async": true,
         "crossDomain": true,
-        "url": "https://google-news.p.rapidapi.com/v1/geo_headlines?country=" + country + "&geo=" + city + "&lang=" + language,
+        "url": "https://google-news.p.rapidapi.com/v1/geo_headlines?" + "&geo=" + geoLocation,
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "google-news.p.rapidapi.com",
@@ -71,6 +83,8 @@ function displayLocalNews(countryCode) {
         }
     }
     $.ajax(settings).done(function (response) {
+
+        
 
         for (var i = 0; i < response.articles.length; i++) {
         
@@ -209,7 +223,6 @@ $.ajax(settings).done(function (response) {
 }
 
 // Conduct search on 'Enter' without pressing search btn
-
 // Execute a function when the user releases a key on the keyboard
 $('#input').keypress(function(event) {
   // Number 13 is the "Enter" key on the keyboard
@@ -317,7 +330,6 @@ $("#searchBtn").click(function () {
 })
 
 //Display further search option when '+' button is clicked
-
 $('#btnMore').click(function () {
     event.preventDefault()
         $('#langBtnDiv').toggle()
