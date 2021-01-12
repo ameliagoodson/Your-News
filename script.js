@@ -264,11 +264,12 @@ $.ajax(settings).done(function (response) {
                     $('#searchResults').append(title)
                     
                 //Publication date
-                    var date = $(document.createElement('div')).attr('id', 'theID')
-                    dateStr = date.text(response.news[i].publishedDateTime)
-                    date = moment(dateStr).format("D MMMM YYYY")
-                    $('#theID').addClass('articleDate')
-                    $("#searchResults").append(date);
+                    var date = $("<p>")   
+                    dateStr = response.news[i].publishedDateTime
+                    dateFormat = moment(dateStr).format("D MMMM YYYY")
+                    date.text(dateFormat)
+                    date.addClass('articleDate')
+                    $("#searchResults").append(date)
                 
                 //Excerpt
                     var excerpt = $('<p>')
