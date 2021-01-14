@@ -22,19 +22,22 @@
 </head>
 <body>
     <nav id="navbar">
-        <h1 id="title" > Your News </h1>
+        <h1 id="title"><img class="logo" src="./assets/wireless.svg">Your News</h1>
     </nav>
     <nav>
         <ul id="mainNav">
-            <li id="covidBtn">Covid</li>
+            <li id="covidBtn">COVID NEWS</li>
         </ul>
     </nav>
 <div class="flex-container">
     <div class="sideNav">
-        <form id="form"> 
+        <div id="searchNews">
+
+        
+            <form id="form"> 
             <label for="Search"></label>
             <div id="inputDiv">
-                <input type="text" id="input" placeholder="Search term">
+                <input type="text" id="input" placeholder="News search">
                 <button id="btnMore">+</button>
             </div>
             <div id="langBtnDiv" style="display: none;">
@@ -262,7 +265,10 @@
                 <button type="button" id="searchBtn">Search</button>
             </div>
         </form>
-    </div>             
+    
+    
+    </div>
+    </div>
     <div class="main">
         <h3 id="headingDiv"></h3>
         <div id="searchResults">
@@ -270,6 +276,7 @@
         
     </div>
     <div id="weatherDiv">
+        <div id="weatherSch">
             <input type="text" id="weatherSearch" placeholder="Search for your city">
             <button type="button" id="weatherBtn">Search</button>
         <div id="weatherSearchDiv">

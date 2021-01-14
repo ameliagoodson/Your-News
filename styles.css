@@ -1,7 +1,9 @@
 :root {
 	--lincolnGreen: #2a4d14;
-	--juneBud: #6dd8d8;
+	--juneBud: #5fe0e0;
 	--terracotta: #e87a5e;
+	--juneBudLight: #d8f1f1;
+	--lightGrey: rgb(223, 223, 223);
 }
 body,
 html {
@@ -12,33 +14,8 @@ html {
 
 #navbar {
 	width: 100vw;
-	background-image: url(./assets/inkblotblank.jpg);
-	background-position: 40% 50%;
-	background-repeat: no-repeat;
+	background-color: var(--juneBudLight);
 	border-bottom: var(--lincolnGreen) solid 5px;
-}
-@media (max-width: 550px) {
-	#navbar {
-		background-position: 40% 40%;
-	}
-}
-
-@media (max-width: 1300px) {
-	#navbar {
-		background-position: -150% 50%;
-	}
-}
-
-@media (max-width: 1600px) {
-	#navbar {
-		background-position: 55% 50%;
-	}
-}
-
-@media (min-width: 1601px) {
-	#navbar {
-		background-position: 60% 50%;
-	}
 }
 
 #title {
@@ -46,7 +23,7 @@ html {
 	padding: 2vh 2vh;
 	font-size: 6vw;
 	text-align: center;
-	color: white;
+	color: black;
 }
 .logo,
 .logoNav {
@@ -64,17 +41,13 @@ html {
 /* Main nav */
 #mainNav {
 	list-style-type: none;
-	display: flex;
-	text-align: center;
-	justify-content: center;
 	background-color: var(--juneBud);
 	height: 6vh;
 }
 #mainNav li {
 	padding-top: 5px;
-	margin-left: 20px;
-	margin-right: 20px;
 	font-size: 18px;
+	font-weight: bold;
 }
 #mainNav li:hover {
 	cursor: pointer;
@@ -95,6 +68,7 @@ html {
 	margin-left: 10px;
 	margin-bottom: 10px;
 	border: none;
+	border-radius: 5px;
 }
 #language {
 	height: 30px;
@@ -125,6 +99,8 @@ html {
 	width: 15vw;
 	margin-left: 10px;
 	margin-right: 10px;
+	margin-top: 10px;
+	border-radius: 15px;
 }
 .sideNavList {
 	list-style-type: none;
@@ -162,21 +138,33 @@ html {
 	margin-bottom: 40px;
 	display: flex;
 }
-/* Weather */
+/* Weather and local headlines*/
 #weatherDiv {
 	padding: 10px;
 	height: fit-content;
 	margin-left: 10px;
 	margin-right: 10px;
 	width: 25vw;
-	border: rgb(192, 190, 190) 1px solid;
+	/* background-color: var(--lightGrey); */
+	/* border-radius: 15px; */
+}
+#weatherSch {
+	background-color: var(--lightGrey);
+	padding: 10px;
+	border-radius: 15px;
 }
 #weatherTitle {
 	text-align: center;
 }
+
 #weatherSearchDiv {
 	width: 100%;
 	display: flex;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
 }
 #localTitle {
 	text-align: center;
@@ -185,6 +173,10 @@ html {
 
 #weatherSearch {
 	width: 70%;
+	height: 30px;
+	margin-bottom: 10px;
+	border: none;
+	border-radius: 5px;
 }
 
 .tempClass {
@@ -200,8 +192,16 @@ html {
 	height: 45px;
 	width: 45px;
 }
+
+/* Trending */
 .trendingImage {
 	width: 100%;
+}
+#localHeadlines {
+	margin-top: 20px;
+	background-color: var(--lightGrey);
+	border-radius: 15px;
+	padding: 10px;
 }
 
 /* CSS Breakpoints */
