@@ -324,6 +324,7 @@ html,
 	.sideNav {
 		width: 100vw;
 		margin: 0px;
+		border-radius: 0px;
 	}
 	.flex-container {
 		display: inline-block;
@@ -338,5 +339,14 @@ html,
 	#rightDiv {
 		width: 100vw;
 		margin: 0px;
+	}
+}
+/* Very small mobiles */
+@media (max-width: 400px) {
+	.tempClass {
+		min-width: 40px;
+	}
+	#weatherSchC {
+		min-width: 60%;
 	}
 }
