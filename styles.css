@@ -234,10 +234,16 @@ html,
 	#weatherBtn {
 		margin-bottom: 10px;
 	}
+	.sideNav {
+		width: 20%;
+	}
 }
 
 /* Small screens and laptops */
 @media (max-width: 1024px) {
+	.sideNav {
+		width: 25%;
+	}
 }
 
 /* Move weather search to header */
@@ -257,7 +263,9 @@ html,
 	.main {
 		width: 70%;
 	}
-
+	.main {
+		width: 100vw;
+	}
 	#centralWeatherDiv {
 		width: 100%;
 		display: flex;
@@ -308,6 +316,21 @@ html,
 	#title {
 		font-size: 45px;
 	}
+	.sideNav {
+		width: 100vw;
+		margin: 0px;
+		border-radius: 0px;
+		display: flex;
+	}
+	.main {
+		width: 100vw;
+	}
+	.flex-container {
+		display: inline-block;
+		width: 100vw;
+		margin-top: 0px;
+		padding-top: 0px;
+	}
 }
 
 /* Mobile devices */
@@ -327,11 +350,7 @@ html,
 	.newsImage {
 		width: 100%;
 	}
-	.sideNav {
-		width: 100vw;
-		margin: 0px;
-		border-radius: 0px;
-	}
+
 	.flex-container {
 		display: inline-block;
 		width: 100vw;
