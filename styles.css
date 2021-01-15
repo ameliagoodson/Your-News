@@ -6,10 +6,12 @@
 	--lightGrey: rgb(223, 223, 223);
 }
 body,
-html {
+html,
+#mainContainer {
 	height: 100vh;
 	width: 100vw;
-	margin: 0;
+
+	/* margin: 0; */
 }
 
 #navbar {
@@ -96,7 +98,7 @@ html {
 .sideNav {
 	background-color: rgb(223, 223, 223);
 	height: fit-content;
-	width: 15vw;
+	width: 15%;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-top: 10px;
@@ -112,7 +114,7 @@ html {
 
 /* Main */
 .main {
-	width: 60vw;
+	width: 60%;
 	padding: 10px;
 }
 #headingDiv {
@@ -139,27 +141,35 @@ html {
 	display: flex;
 }
 /* Weather and local headlines*/
-#weatherDiv {
+#rightDiv {
 	padding: 10px;
 	height: fit-content;
 	margin-left: 10px;
 	margin-right: 10px;
-	width: 25vw;
+	width: 25%;
 	/* background-color: var(--lightGrey); */
 	/* border-radius: 15px; */
 }
-#weatherSch {
+#weatherSchR {
 	background-color: var(--lightGrey);
 	padding: 10px;
 	border-radius: 15px;
+}
+
+#weatherBtnDiv {
+	display: inline;
+}
+#weatherBtn {
+	border: none;
+	height: 30px;
+	background-color: var(--juneBudLight);
 }
 #weatherTitle {
 	text-align: center;
 }
 
-#weatherSearchDiv {
+#weatherResults {
 	width: 100%;
-	display: flex;
 	background-color: white;
 	display: flex;
 	justify-content: center;
@@ -177,6 +187,7 @@ html {
 	margin-bottom: 10px;
 	border: none;
 	border-radius: 5px;
+	text-align: center;
 }
 
 .tempClass {
@@ -189,9 +200,11 @@ html {
 }
 .iconClass {
 	background-color: white;
-	height: 45px;
-	width: 45px;
+	height: 40px;
+	width: 40px;
 }
+
+/* Central weather div (for mobiles/tablets) */
 
 /* Trending */
 .trendingImage {
@@ -204,15 +217,103 @@ html {
 	padding: 10px;
 }
 
-/* CSS Breakpoints */
+/* MEDIA QUERIES FOR RESPONSIVENESS */
 
-@media (max-width: 450px) {
+/* Desktops, large screens */
+@media (max-width: 1200px) {
+	#weatherSearch {
+		width: 100%;
+	}
+	#weatherBtnDiv {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#weatherBtn {
+		margin-bottom: 10px;
+	}
+}
+
+/* Small screens and laptops */
+@media (max-width: 1024px) {
+}
+
+/* Move weather search to header */
+@media (min-width: 856px) {
+	#centralWeatherDiv {
+		display: none;
+	}
+}
+@media (max-width: 855px) {
+	#mainNav {
+		margin-bottom: 0;
+	}
+
+	#rightDiv {
+		display: none;
+	}
+	.main {
+		width: 70%;
+	}
+
+	#centralWeatherDiv {
+		width: 100%;
+		display: flex;
+		border-bottom: var(--lightGrey) 1px solid;
+		height: 40px;
+	}
+	#weatherSchC {
+		display: flex;
+		width: 50%;
+	}
+	#weatherSearchC {
+		width: 100%;
+		border: none;
+		border-radius: 5px;
+		text-align: center;
+	}
+	#weatherSearch {
+		width: 100%;
+		float: left;
+	}
+
+	#weatherBtnDivC {
+		float: left;
+	}
+	#weatherBtnC {
+		border: none;
+		height: 40px;
+		background-color: var(--juneBudLight);
+	}
+
+	#weatherResultsC {
+		display: flex;
+		width: 30%;
+	}
+	#tempDivC,
+	#conditionDivC,
+	#iconDivC {
+		float: left;
+	}
+	.iconClass {
+		border-bottom: var(--lightGrey) 1px solid !important;
+	}
+}
+
+/* iPads, Tablets */
+@media (max-width: 768px) {
+	#title {
+		font-size: 45px;
+	}
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
 	#title {
 		font-size: 21px;
 	}
 	.main {
 		width: 100vw;
-		/* display: inline-block; */
 	}
 	#mainNav {
 		margin-bottom: 0px;
@@ -234,14 +335,8 @@ html {
 	.sideNavList {
 		display: none;
 	}
-	#weatherDiv {
+	#rightDiv {
 		width: 100vw;
 		margin: 0px;
-	}
-}
-
-@media (min-width: 900px) {
-	#title {
-		font-size: 45px;
 	}
 }

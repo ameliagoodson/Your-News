@@ -21,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
 </head>
 <body>
+<div id="mainContainer">
     <nav id="navbar">
         <h1 id="title"><img class="logo" src="./assets/wireless.svg">Your News</h1>
     </nav>
@@ -29,12 +30,27 @@
             <li id="covidBtn">COVID NEWS</li>
         </ul>
     </nav>
+<div id="centralWeatherDiv">
+    <div id="weatherSchC">
+        <input type="text" id="weatherSearchC" placeholder="Search for your city">
+        <div id="weatherBtnDivC">
+            <button type="button" id="weatherBtnC">Search</button>
+        </div>
+    </div>
+    <div id="weatherResultsC">
+        <div id="tempDivC">
+        </div>
+        <div id="conditionDivC">
+        </div>
+        <div id="iconDivC">
+        </div>
+    </div>
+</div>
+
 <div class="flex-container">
     <div class="sideNav">
         <div id="searchNews">
-
-        
-            <form id="form"> 
+            <form id="searchForm"> 
             <label for="Search"></label>
             <div id="inputDiv">
                 <input type="text" id="input" placeholder="News search">
@@ -272,14 +288,15 @@
     <div class="main">
         <h3 id="headingDiv"></h3>
         <div id="searchResults">
-        </div>
-        
+        </div>   
     </div>
-    <div id="weatherDiv">
-        <div id="weatherSch">
-            <input type="text" id="weatherSearch" placeholder="Search for your city">
-            <button type="button" id="weatherBtn">Search</button>
-        <div id="weatherSearchDiv">
+    <div id="rightDiv">
+        <div id="weatherSchR">
+            <input type="text" id="weatherSearch" placeholder="Your city">
+                <div id="weatherBtnDiv">
+                    <button type="button" id="weatherBtn">Search</button>
+                </div>
+        <div id="weatherResults">
             <div id="tempDiv">
             </div>
             <div id="conditionDiv">
@@ -287,15 +304,17 @@
             <div id="iconDiv">
             </div>    
         </div>
-        <div id="localHeadlines">
-            <h3 id="localTitle" ><img class="logo" src="./assets/wireless.svg">TRENDING</h3>
-        </div>
     </div>
+    <div id="localHeadlines">
+        <h3 id="localTitle"><img class="logo" src="./assets/wireless.svg">TRENDING</h3>
+    </div>
+</div>
 </div>
     
     <!-- jQuery link -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
     <script src="script.js"></script>
+</div>
 </body>
 </html>
