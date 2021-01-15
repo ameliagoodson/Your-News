@@ -193,10 +193,12 @@ html,
 .tempClass {
 	background-color: white;
 	margin-top: 8px;
+	min-width: 60px;
 }
 .conditionClass {
 	margin-top: 8px;
 	margin-left: 5px;
+	min-width: 120px;
 }
 .iconClass {
 	background-color: white;
@@ -284,6 +286,7 @@ html,
 		border: none;
 		height: 40px;
 		background-color: var(--juneBudLight);
+		margin-right: 20px;
 	}
 
 	#weatherResultsC {
@@ -310,13 +313,16 @@ html,
 /* Mobile devices */
 @media (max-width: 480px) {
 	#title {
-		font-size: 21px;
+		font-size: 32px;
 	}
 	.main {
 		width: 100vw;
 	}
 	#mainNav {
 		margin-bottom: 0px;
+	}
+	#covidBtn {
+		font-size: 16px;
 	}
 	.newsImage {
 		width: 100%;
@@ -340,6 +346,9 @@ html,
 		width: 100vw;
 		margin: 0px;
 	}
+	.iconClass {
+		display: none;
+	}
 }
 /* Very small mobiles */
 @media (max-width: 400px) {
@@ -348,5 +357,8 @@ html,
 	}
 	#weatherSchC {
 		min-width: 60%;
+	}
+	#iconClass {
+		display: none;
 	}
 }
