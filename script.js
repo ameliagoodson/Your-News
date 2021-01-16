@@ -408,6 +408,9 @@ function getForecast(latitude, longitude) {
     $('#iconDiv').empty()
     $('#tempDiv').empty()
     $('#conditionDiv').empty()
+    $('#iconDivC').empty()
+    $('#tempDivC').empty()
+    $('#conditionDivC').empty()
     latitudeVal = latitude
     longitudeVal = longitude
 
@@ -416,25 +419,43 @@ function getForecast(latitude, longitude) {
         method: "GET",
         url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitudeVal + "&lon=" + longitudeVal + "&units=metric&exclude={part}&appid=" + weatherAPIKey
     }).then(function (response) {
-        // console.log(response)
+        
+     //SIDE BAR   
     //Temperature
         var temperature = $('<p>')
         var tempRounded = Math.round(response.current.temp)
         temperature.text(`${tempRounded} °C `)
         temperature.addClass("tempClass")
         $('#tempDiv').append(temperature)
-        $('#tempDivC').append(temperature)
+
     //Weather condition (description)
         var condition = $('<p>')
         condition.text(response.current.weather[0].description)
         condition.addClass('conditionClass')
         $('#conditionDiv').append(condition)
+
+        //Condition (icon)
+        var icon = $('<img>')
+        icon.attr('src', "http://openweathermap.org/img/wn/" + response.current.weather[0].icon + ".png")
+        icon.addClass("iconClass")
+        $('#iconDiv').append(icon)
+
+        // CENTRAL BAR
+        //Temperature
+        var temperature = $('<p>')
+        var tempRounded = Math.round(response.current.temp)
+        temperature.text(`${tempRounded} °C `)
+        temperature.addClass("tempClass")
+        $('#tempDivC').append(temperature)
+    //Weather condition (description)
+        var condition = $('<p>')
+        condition.text(response.current.weather[0].description)
+        condition.addClass('conditionClass')
         $('#conditionDivC').append(condition)
     //Condition (icon)
         var icon = $('<img>')
         icon.attr('src', "http://openweathermap.org/img/wn/" + response.current.weather[0].icon + ".png")
         icon.addClass("iconClass")
-        $('#iconDiv').append(icon)
         $('#iconDivC').append(icon)
     })
 }
