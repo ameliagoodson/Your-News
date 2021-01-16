@@ -13,6 +13,10 @@ var tempDiv = $('#tempDiv')
 var iconDiv = $('#iconDiv')
 var weatherAPIKey = "2c93b8b4f835efd50e9d4694052f2372"
 
+var headingDiv = $('#headingDiv')
+var headingIcon = $('#headingIcon')
+var trendingBtm = $('#trendingHeadlinesBtm')
+
 // Display trending news on side bar upon page load
 window.onload = function () {
     displayTrendingNews()
@@ -105,7 +109,7 @@ function displayLocalNews(geoLocation) {
         }
         });
 }
-// Trending news
+// Trending news - side bar
 function displayTrendingNews() {
     const settings = {
 	"async": true,
@@ -116,7 +120,7 @@ function displayTrendingNews() {
 		"x-rapidapi-key": "3ff1283524msh220bfc89bcc77a5p1ff266jsnc3c75477f277",
 		"x-rapidapi-host": "webit-news-search.p.rapidapi.com"
 	}
-};
+};    
 
 $.ajax(settings).done(function (response) {
     
@@ -134,26 +138,61 @@ $.ajax(settings).done(function (response) {
             title.text(response.data.results[i].title)
             title.attr("href", response.data.results[i].url)
             title.addClass('articleHeading')
-            $('#localHeadlines').append(title)
+            $('#trendingHeadlines').append(title)
+            
 
         //Publication date
             var date = $("<p>")
             dateStr = date.text(response.data.results[i].date)
             date = moment(dateStr).format("D MMMM YYYY")
-            $('#localHeadlines').append(date);
-        
+            $('#trendingHeadlines').append(date);
+    
         //Image
             var image = $("<img>", {
                 class: "trendingImage"
             })
             image.attr('src', response.data.results[i].image)
-            $('#localHeadlines').append(image)
+            $('#trendingHeadlines').append(image)
+            
+        }
+        function addSearchResultsBtm() {
+            headingDiv.text('LOCAL HEADLINES')
+            var logo = $('<img>')
+            logo.attr('src', './assets/wireless.svg')
+            logo.addClass('logo')
+            headingDiv.prepend(logo)
+            
+        //Title
+            var title = $("<a>")
+            title.text(response.data.results[i].title)
+            title.attr("href", response.data.results[i].url)
+            title.addClass('articleHeading')
+            $('#trendingHeadlinesBtm').append(title)
+            
+
+        //Publication date
+            var date = $("<p>")
+            dateStr = date.text(response.data.results[i].date)
+            date = moment(dateStr).format("D MMMM YYYY")
+            $('#trendingHeadlinesBtm').append(date);
+    
+        //Image
+            var image = $("<img>", {
+                class: "trendingImage"
+            })
+            image.attr('src', response.data.results[i].image)
+            $('#trendingHeadlinesBtm').append(image)
+            
         }
                 
         addSearchResults()
+        addSearchResultsBtm()
     }
 });
 }
+// Trending news - bottom
+
+
 
 //Covid-19 news
 $('#covidBtn').click(function () {
@@ -161,8 +200,6 @@ $('#covidBtn').click(function () {
     covidNews()
 })
 
-var headingDiv = $('#headingDiv')
-var headingIcon = $('#headingIcon')
 
 function covidNews() {
     const settings = {

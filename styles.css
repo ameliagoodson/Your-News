@@ -147,8 +147,6 @@ html,
 	margin-left: 10px;
 	margin-right: 10px;
 	width: 25%;
-	/* background-color: var(--lightGrey); */
-	/* border-radius: 15px; */
 }
 #weatherSchR {
 	background-color: var(--lightGrey);
@@ -176,7 +174,7 @@ html,
 	align-items: center;
 	border-radius: 5px;
 }
-#localTitle {
+#trendingTitle {
 	text-align: center;
 	font-size: 22px;
 }
@@ -212,7 +210,7 @@ html,
 .trendingImage {
 	width: 100%;
 }
-#localHeadlines {
+#trendingHeadlines {
 	margin-top: 20px;
 	background-color: var(--lightGrey);
 	border-radius: 15px;
@@ -220,7 +218,6 @@ html,
 }
 
 /* MEDIA QUERIES FOR RESPONSIVENESS */
-
 /* Desktops, large screens */
 @media (max-width: 1200px) {
 	#weatherSearch {
@@ -251,6 +248,9 @@ html,
 	#centralWeatherDiv {
 		display: none;
 	}
+	#trendingHeadlinesBtm {
+		display: none;
+	}
 }
 @media (max-width: 855px) {
 	#mainNav {
@@ -260,12 +260,15 @@ html,
 	#rightDiv {
 		display: none;
 	}
+	#trendingTitleBtm {
+		font-size: 22px;
+		text-align: center;
+	}
+
 	.main {
 		width: 70%;
 	}
-	.main {
-		width: 100vw;
-	}
+
 	#centralWeatherDiv {
 		width: 100%;
 		display: flex;
@@ -312,6 +315,7 @@ html,
 }
 
 /* iPads, Tablets */
+
 @media (max-width: 768px) {
 	#title {
 		font-size: 45px;
