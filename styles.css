@@ -257,9 +257,12 @@ html,
 		margin-bottom: 0;
 	}
 
-	#rightDiv {
+	#rightDiv,
+	#weatherSchR,
+	#weatherResults {
 		display: none;
 	}
+
 	#trendingTitleBtm {
 		font-size: 22px;
 		text-align: center;
