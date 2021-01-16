@@ -88,6 +88,7 @@ html,
 #btnMore {
 	margin-left: 10px;
 	height: 30px;
+	border: none;
 }
 #searchBtn {
 	min-width: fit-content;
@@ -258,6 +259,7 @@ html,
 @media (max-width: 855px) {
 	#mainNav {
 		margin-bottom: 0;
+		border-bottom: solid 2px var(--lincolnGreen);
 	}
 
 	#rightDiv {
@@ -351,8 +353,10 @@ html,
 	}
 	#mainNav {
 		margin-bottom: 0px;
+		padding: 5px !important;
 	}
-	#covidBtn {
+	#covidBtn,
+	#mainNav.li {
 		font-size: 16px;
 	}
 	.newsImage {

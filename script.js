@@ -336,8 +336,6 @@ $("#searchBtn").click(function () {
         }
 
         $.ajax(settings).done(function (response) {
-            console.log(settings.url)
-            console.log(response)
             for (var i = 0; i < response.articles.length; i++) {
                 function addSearchResults() {
                 //Heading
@@ -349,11 +347,12 @@ $("#searchBtn").click(function () {
                     
                 //Publication date
                     var date = $("<p>")
-                    dateStr.text(response.articles[i].published_date)
+                    var dateStr = response.articles[i].published_date
                     date = moment(dateStr).format("D MMMM YYYY")
                     date.className = 'date'
                     $("#searchResults").append(date);
                     
+
                 //Summary
                     var summary = $("<p>")
                     summary.text(response.articles[i].summary)
@@ -370,8 +369,6 @@ $("#searchBtn").click(function () {
 $('#btnMore').click(function () {
     event.preventDefault()
         $('#langBtnDiv').toggle()
-       
-        console.log('button check')
 
 })
 
