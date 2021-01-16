@@ -9,10 +9,20 @@ This web application uses two news APIs to provide users
 with multilingual news articles. Currently supported
 languages are:
 
-- English
+- Arabic
+- Dutch
 - French
+- English
 - German
+- Greek
+- Hindi
+- Indonesian
 - Italian
+- Japanese
+- Korean
+- Portuguese
+- Punjabi
+- Russian
 - Spanish
 
 ## APIs
