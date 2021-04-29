@@ -36,7 +36,7 @@ function getCoords() {
         var latitude = position.coords.latitude
         var longitude = position.coords.longitude
 
-        convertCoords(latitude, longitude)
+        displayLocalNews()
         getForecast(latitude, longitude)
         
         }
@@ -47,26 +47,9 @@ function getCoords() {
 navigator.geolocation.getCurrentPosition(success)
 }
 
-//convert user coordinates to address using Google maps API
-function convertCoords(latitude, longitude) {
-    
-    var latlng = `${latitude}, ${longitude}`
-    var apiKey = "AIzaSyDyI5MQ5hTnh-zH-UuVGbih40E5JPQvhdI"
-    
-    $.ajax({
-        url: "https://maps.googleapis.com/maps/api/geocode/json?&latlng=" + latlng + "&key=" + apiKey,
-        method: "get"
-    }).then(function (response) {
-        
-        var geoLocation = response.results[0].address_components[0].long_name
-        // console.log(geoLocation) working
-        displayLocalNews(geoLocation)
-    })
-}
-
 // Display local headlines using unofficial Google News API (no images)
-function displayLocalNews(geoLocation) {
-    // console.log(geoLocation) working
+function displayLocalNews() {
+    // console.log(geoLocation) 
 
         //Header
         headingDiv.text('LOCAL HEADLINES')
@@ -79,7 +62,7 @@ function displayLocalNews(geoLocation) {
         
         "async": true,
         "crossDomain": true,
-        "url": "https://google-news.p.rapidapi.com/v1/geo_headlines?" + "&geo=" + geoLocation,
+        "url": "https://google-news.p.rapidapi.com/v1/geo_headlines?&geo=Australia",
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "google-news.p.rapidapi.com",

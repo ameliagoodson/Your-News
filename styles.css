@@ -16,14 +16,15 @@ html,
 
 #navbar {
 	width: 100vw;
+	height: 10vh;
 	background-color: var(--juneBudLight);
 	border-bottom: var(--lincolnGreen) solid 5px;
 }
 
 #title {
 	width: 100vw;
-	padding: 2vh 2vh;
-	font-size: 6vw;
+	padding: 1vh 1vh;
+	font-size: 3vw;
 	text-align: center;
 	color: black;
 }
@@ -68,9 +69,10 @@ html,
 	width: 70%;
 	height: 30px;
 	margin-left: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	border: none;
 	border-radius: 5px;
+	text-align: center;
 }
 #language {
 	height: 30px;
@@ -94,6 +96,7 @@ html,
 	min-width: fit-content;
 	border: none;
 	margin-bottom: 10px;
+	background-color: var(--juneBudLight);
 }
 
 .sideNav {
@@ -174,6 +177,7 @@ html,
 	justify-content: center;
 	align-items: center;
 	border-radius: 5px;
+	padding: 4px;
 }
 #iconDiv,
 #tempDiv,
@@ -308,7 +312,7 @@ html,
 
 	#weatherResultsC {
 		display: flex;
-		width: 30%;
+		width: fit-content;
 	}
 	#tempDivC,
 	#conditionDivC,
@@ -323,9 +327,6 @@ html,
 /* iPads, Tablets */
 
 @media (max-width: 768px) {
-	#title {
-		font-size: 45px;
-	}
 	.sideNav {
 		width: 100vw;
 		margin: 0px;
