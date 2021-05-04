@@ -209,9 +209,21 @@ nav {
 	display: inline-block;
 	margin-left: 40px;
 }
+.imageDiv {
+	display: flex;
+	justify-content: center;
+}
+.searchImage {
+	max-width: 80%;
+	padding: 10px;
+	max-height: 150px;
+}
 .excerpt {
 	display: inline-block;
 	max-width: 50%;
+}
+.excerptLang {
+	display: inline-block;
 }
 /* Weather and local headlines*/
 #rightDiv {

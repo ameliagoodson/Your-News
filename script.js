@@ -292,25 +292,37 @@ $("#searchBtn").click(function () {
           
             for (var i = 0; i < response.data.results.length; i++) {
                 function addSearchResults() {
+
+                    var searchResDiv = $('<div>', {class: 'articleDiv'})
+                    $("#searchResults").append(searchResDiv)
+
                 //Heading
-                    var title = $("<a>")
+                    var title = $("<a>", {
+                        class: 'articleHeading'
+                    })
                     title.text(response.data.results[i].title)
                     title.attr("href", response.data.results[i].url)
-                    title.addClass('articleHeading')
-                    $('#searchResults').append(title)
+                    searchResDiv.append(title)
                     
                 //Publication date
-                    var date = $("<p>")
+                    var date = $("<p>", {
+                        class: 'articleDate'
+                    })
                     dateStr = date.text(response.data.results[i].date)
-                    date = moment(dateStr).format("D MMMM YYYY")
-                    $("#searchResults").append(date);
+                    date.text(moment(dateStr).format("D MMMM YYYY"))
+                    searchResDiv.append(date);
                 //Subheading
+                    var imageDiv = $('<div>', {
+                        class: 'imageDiv'
+                    })
+                    searchResDiv.append(imageDiv)
+                    
                     var image = $("<img>",{
-                        class: "newsImage"
+                        class: "searchImage"
                     })
                     image.attr('src', response.data.results[i].image)
                     
-                    $('#searchResults').append(image)
+                    imageDiv.append(image)
                 }
                 
                 addSearchResults()
@@ -334,25 +346,31 @@ $("#searchBtn").click(function () {
         $.ajax(settings).done(function (response) {
             for (var i = 0; i < response.articles.length; i++) {
                 function addSearchResults() {
+
+                    var searchResDiv = $('<div>', {class: 'articleDiv'})
+                    $("#searchResults").append(searchResDiv)
+
                 //Heading
                     var title = $("<a>")
                     title.text(response.articles[i].title)
                     title.attr("href", response.articles[i].link)
                     title.addClass('articleHeading')
-                    $('#searchResults').append(title)
+                    searchResDiv.append(title)
                     
                 //Publication date
-                    var date = $("<p>")
+                    var date = $("<p>", {
+                        class: 'articleDate'
+                    })
                     var dateStr = response.articles[i].published_date
-                    date = moment(dateStr).format("D MMMM YYYY")
-                    date.className = 'date'
-                    $("#searchResults").append(date);
+                    date.text(moment(dateStr).format("D MMMM YYYY"))
+                    searchResDiv.append(date);
                     
-
                 //Summary
-                    var summary = $("<p>")
+                    var summary = $("<p>", {
+                        class: 'excerptLang'
+                    })
                     summary.text(response.articles[i].summary)
-                    $('#searchResults').append(summary)
+                    searchResDiv.append(summary)
                 }
                 addSearchResults()
             }
