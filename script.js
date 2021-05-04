@@ -290,45 +290,55 @@ $("#searchBtn").click(function () {
         
         $.ajax(settings).done(function (response) {
           
-            for (var i = 0; i < response.data.results.length; i++) {
-                function addSearchResults() {
+            if (response.data.results.length < 0) {
+                for (var i = 0; i < response.data.results.length; i++) {
+                    function addSearchResults() {
 
-                    var searchResDiv = $('<div>', {class: 'articleDiv'})
-                    $("#searchResults").append(searchResDiv)
+                        var searchResDiv = $('<div>', { class: 'articleDiv' })
+                        $("#searchResults").append(searchResDiv)
 
-                //Heading
-                    var title = $("<a>", {
-                        class: 'articleHeading'
-                    })
-                    title.text(response.data.results[i].title)
-                    title.attr("href", response.data.results[i].url)
-                    searchResDiv.append(title)
+                        //Heading
+                        var title = $("<a>", {
+                            class: 'articleHeading'
+                        })
+                        title.text(response.data.results[i].title)
+                        title.attr("href", response.data.results[i].url)
+                        searchResDiv.append(title)
                     
-                //Publication date
-                    var date = $("<p>", {
-                        class: 'articleDate'
-                    })
-                    dateStr = date.text(response.data.results[i].date)
-                    date.text(moment(dateStr).format("D MMMM YYYY"))
-                    searchResDiv.append(date);
-                //Subheading
-                    var imageDiv = $('<div>', {
-                        class: 'imageDiv'
-                    })
-                    searchResDiv.append(imageDiv)
+                        //Publication date
+                        var date = $("<p>", {
+                            class: 'articleDate'
+                        })
+                        dateStr = date.text(response.data.results[i].date)
+                        date.text(moment(dateStr).format("D MMMM YYYY"))
+                        searchResDiv.append(date);
+                        //Subheading
+                        var imageDiv = $('<div>', {
+                            class: 'imageDiv'
+                        })
+                        searchResDiv.append(imageDiv)
                     
-                    var image = $("<img>",{
-                        class: "searchImage"
-                    })
-                    image.attr('src', response.data.results[i].image)
+                        var image = $("<img>", {
+                            class: "searchImage"
+                        })
+                        image.attr('src', response.data.results[i].image)
                     
-                    imageDiv.append(image)
-                }
+                        imageDiv.append(image)
+                    }
                 
-                addSearchResults()
+                    addSearchResults()
+                }
+            }
+            else {
+                var noResultsDiv = $('<div>', {
+                    class: 'noResults'
+                })
+                noResultsDiv.text('No results found. Try broadening your search.')
+                $('#searchResults').append(noResultsDiv) 
             }
         });
     }
+
     // If user selects another language, use Newscatcher API, which is multi-lingual
     else {
         const settings = {
@@ -344,7 +354,9 @@ $("#searchBtn").click(function () {
         }
 
         $.ajax(settings).done(function (response) {
-            for (var i = 0; i < response.articles.length; i++) {
+
+            if (response.articles.length < 0) {
+                for (var i = 0; i < response.articles.length; i++) {
                 function addSearchResults() {
 
                     var searchResDiv = $('<div>', {class: 'articleDiv'})
@@ -373,6 +385,15 @@ $("#searchBtn").click(function () {
                     searchResDiv.append(summary)
                 }
                 addSearchResults()
+            }
+            }
+
+            else {
+                var noResultsDiv = $('<div>', {
+                    class: 'noResults'
+                })
+                noResultsDiv.text('No results found. Try broadening your search.')
+                $('#searchResults').append(noResultsDiv) 
             }
          
         })
