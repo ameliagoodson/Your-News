@@ -24,6 +24,9 @@ html,
 	justify-content: left;
 	background-color: var(--juneBudLight);
 }
+#covidNav {
+	display: none;
+}
 #navbar {
 	justify-content: left;
 	height: 10vh;
@@ -37,7 +40,9 @@ html,
 	text-align: center;
 	color: black;
 	font-weight: bold;
+	cursor: pointer;
 }
+
 .logo,
 .logoNav {
 	height: 6vh;
@@ -143,18 +148,19 @@ nav {
 	display: flex;
 	justify-content: center;
 }
-#covidBtn {
+.covidBtn {
 	margin: 10px;
 	font-size: 16px;
 	font-weight: bold;
 	border: none;
 	outline: none;
 	background-color: rgb(223, 223, 223);
+	font-family: "Comfortaa", cursive;
 }
-#covidBtn :hover {
+.covidBtn :hover {
 	color: white;
 }
-#covidTxt {
+.covidTxt {
 	margin: 0px;
 }
 /* Main */
@@ -183,19 +189,29 @@ nav {
 	color: black;
 	display: block;
 	font-weight: bold;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .articleDate {
 	font-style: italic;
+	margin-bottom: 0px;
 }
 .articleText {
 	color: black;
 }
 
-.newsImage {
-	width: 60%;
-	margin-bottom: 40px;
+.excerptDiv {
 	display: flex;
+	justify-content: left;
+	padding: 10px 10px 20px 10px;
+}
+.newsImage {
+	max-width: 50%;
+	display: inline-block;
+	margin-left: 40px;
+}
+.excerpt {
+	display: inline-block;
+	max-width: 50%;
 }
 /* Weather and local headlines*/
 #rightDiv {
@@ -378,13 +394,38 @@ nav {
 }
 
 /* iPads, Tablets */
+/* move covidDiv to navbar */
 
 @media (max-width: 768px) {
+	#covidDiv {
+		display: none;
+	}
+	#nav-container {
+		display: flex;
+		justify-content: space-between;
+	}
+	#title {
+		display: block;
+		font-size: 20px;
+	}
+	#covidNav {
+		display: flex;
+		margin: none;
+		max-height: 50px;
+	}
+	.covidBtn {
+		background-color: var(--juneBudLight);
+	}
+	.covidTxt {
+		font-size: 13px;
+	}
 	.sideNav {
 		width: 100vw;
 		margin: 0px;
 		border-radius: 0px;
-		display: flex;
+	}
+	#searchNews {
+		border-radius: 0px;
 	}
 	.main {
 		width: 100vw;
@@ -403,7 +444,7 @@ nav {
 /* Mobile devices */
 @media (max-width: 480px) {
 	#title {
-		font-size: 32px;
+		font-size: 16px;
 	}
 	.main {
 		width: 100vw;
@@ -412,7 +453,7 @@ nav {
 		margin-bottom: 0px;
 		padding: 5px !important;
 	}
-	#covidBtn,
+	.covidBtn,
 	#mainNav.li {
 		font-size: 16px;
 	}

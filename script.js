@@ -181,7 +181,7 @@ $.ajax(settings).done(function (response) {
 
 
 //Covid-19 news
-$('#covidBtn').click(function () {
+$('.covidBtn').click(function () {
     clear()
     covidNews()
 })
@@ -205,18 +205,21 @@ $.ajax(settings).done(function (response) {
                 function addSearchResults() {
                 
                 //Heading
-                    headingDiv.text('COVID-19')
+                    headingDiv.text('COVID NEWS')
                     var logo = $('<img>')
                     logo.attr('src', './assets/wireless.svg')
                     logo.addClass('logo')
                     headingDiv.prepend(logo)
                    
+                    var covidDiv = $('<div>', {class: 'articleDiv'})
+                    $("#searchResults").append(covidDiv)
+
                 //Title
                     var title = $("<a>")
                     title.text(response.news[i].title)
                     title.attr("href", response.news[i].originalUrl)
                     title.addClass('articleHeading')
-                    $('#searchResults').append(title)
+                    covidDiv.append(title)
                     
                 //Publication date
                     var date = $("<p>")   
@@ -224,12 +227,19 @@ $.ajax(settings).done(function (response) {
                     dateFormat = moment(dateStr).format("D MMMM YYYY")
                     date.text(dateFormat)
                     date.addClass('articleDate')
-                    $("#searchResults").append(date)
+                    covidDiv.append(date)
                 
+                //Excerpt div 
+                    var excerptDiv = $('<div>', {
+                        class: 'excerptDiv'
+                    })
+                    covidDiv.append(excerptDiv)
                 //Excerpt
-                    var excerpt = $('<p>')
+                    var excerpt = $('<p>', {
+                        class: 'excerpt'
+                    })
                     excerpt.text(response.news[i].excerpt)
-                    $("#searchResults").append(excerpt)
+                    excerptDiv.append(excerpt)
 
                 //Subheading
                     if (response.news[i].images != null) {
@@ -238,7 +248,7 @@ $.ajax(settings).done(function (response) {
                             class: "newsImage"
                         })
                         image.attr('src', response.news[i].images[0].url)
-                        $('#searchResults').append(image)
+                        excerptDiv.append(image)
                 }}
                 addSearchResults()
             }
