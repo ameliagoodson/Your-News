@@ -3,6 +3,7 @@ var input = $("#input")
 var language = $('#language')
 var country = $('#country')
 var searchResultsDiv = $("#searchResults")
+var articleDiv = $('.articleDiv')
 
 var searchImg = $('#searchImg')
 var googleTranslate = $('#googleTranslate')
@@ -75,19 +76,20 @@ function displayLocalNews() {
 
         for (var i = 0; i < response.articles.length; i++) {
         
+        //Article div
+            var articleDiv = $('<div>', {class: 'articleDiv'})
+            $("#searchResults").append(articleDiv)
         //Heading
-            var title = $("<a>")
+            var title = $("<a>", {class: 'articleHeading'})
             title.text(response.articles[i].title)
-            title.addClass('articleHeading')
             title.attr("href", response.articles[i].link)
-            $("#searchResults").append(title)
+            articleDiv.append(title)
           
         //Publication date
-            var date = $("<p>")
-            dateStr = response.articles[i].published
-            date = moment(dateStr).format("D MMMM YYYY")
-            date.className ='date'
-            $("#searchResults").append(date);
+            var date = $("<p>", {class: 'articleDate'})
+            var dateStr = response.articles[i].published
+            date.text(moment(dateStr).format("D MMMM YYYY"))
+            articleDiv.append(date); 
         ////No subheading or summary article available
         }
         });
@@ -114,6 +116,7 @@ $.ajax(settings).done(function (response) {
             var logo = $('<img>')
             logo.attr('src', './assets/wireless.svg')
             logo.addClass('logo')
+            headingDiv.addClass('heading')
             headingDiv.prepend(logo)
             
         //Title

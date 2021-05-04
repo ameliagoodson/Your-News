@@ -4,6 +4,7 @@
 	--terracotta: #e87a5e;
 	--juneBudLight: #d8f1f1;
 	--lightGrey: rgb(223, 223, 223);
+	--lightestGrey: rgb(247 246 246);
 }
 body,
 html,
@@ -14,19 +15,28 @@ html,
 	/* margin: 0; */
 }
 
+.heading {
+	font-family: "Comfortaa", cursive;
+}
+
+#nav-container {
+	display: flex;
+	justify-content: left;
+	background-color: var(--juneBudLight);
+}
 #navbar {
-	width: 100vw;
+	justify-content: left;
 	height: 10vh;
 	background-color: var(--juneBudLight);
-	border-bottom: var(--lincolnGreen) solid 5px;
 }
 
 #title {
-	width: 100vw;
 	padding: 1vh 1vh;
-	font-size: 3vw;
+	padding-left: 30px;
+	font-size: 2vw;
 	text-align: center;
 	color: black;
+	font-weight: bold;
 }
 .logo,
 .logoNav {
@@ -40,23 +50,34 @@ html,
 	display: flex;
 	flex-direction: row;
 	height: 100vh;
+
+	justify-content: center;
 }
+.container-main {
+	display: flex;
+	max-width: 1300px;
+}
+
 /* Main nav */
+nav {
+	display: flex;
+}
+
 #mainNav {
 	list-style-type: none;
 	background-color: var(--juneBud);
 	height: 6vh;
+	margin-bottom: 0px;
+	padding: 0px;
+	display: flex;
+	justify-content: left;
 }
-#mainNav li {
-	padding-top: 5px;
-	font-size: 18px;
-	font-weight: bold;
-}
-#mainNav li:hover {
-	cursor: pointer;
-	color: white;
-}
+
 /* Side nav */
+#searchNews {
+	background-color: rgb(223, 223, 223);
+	border-radius: 15px;
+}
 
 #langBtnDiv {
 	width: 100%;
@@ -100,7 +121,6 @@ html,
 }
 
 .sideNav {
-	background-color: rgb(223, 223, 223);
 	height: fit-content;
 	width: 15%;
 	margin-left: 10px;
@@ -116,6 +136,27 @@ html,
 	margin: 10px;
 }
 
+#covidDiv {
+	margin-top: 20px;
+	background-color: rgb(223, 223, 223);
+	border-radius: 15px;
+	display: flex;
+	justify-content: center;
+}
+#covidBtn {
+	margin: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+	outline: none;
+	background-color: rgb(223, 223, 223);
+}
+#covidBtn :hover {
+	color: white;
+}
+#covidTxt {
+	margin: 0px;
+}
 /* Main */
 .main {
 	width: 60%;
@@ -124,6 +165,18 @@ html,
 #headingDiv {
 	text-align: center;
 	font-size: 22px;
+}
+#searchResults {
+	margin: 0px 10px 10px 10px;
+	padding: 5px 10px 10px 10px;
+	border-radius: 5px;
+}
+.articleDiv {
+	background-color: rgb(248, 247, 245);
+	padding: 1px 10px 1px 10px;
+	margin: 10px;
+	border-radius: 5px;
+	box-shadow: var(--lightGrey) 2px 3px;
 }
 .articleHeading {
 	font-size: 20px;
@@ -342,6 +395,9 @@ html,
 		margin-top: 0px;
 		padding-top: 0px;
 	}
+	.container-main {
+		display: inline-block;
+	}
 }
 
 /* Mobile devices */
@@ -360,6 +416,7 @@ html,
 	#mainNav.li {
 		font-size: 16px;
 	}
+
 	.newsImage {
 		width: 100%;
 	}
