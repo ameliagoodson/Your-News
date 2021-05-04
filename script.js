@@ -290,8 +290,10 @@ $("#searchBtn").click(function () {
         
         $.ajax(settings).done(function (response) {
           
-            if (response.data.results.length < 0) {
+            if (response.data.results.length > 0) {
                 for (var i = 0; i < response.data.results.length; i++) {
+
+                    console.log('results')
                     function addSearchResults() {
 
                         var searchResDiv = $('<div>', { class: 'articleDiv' })
@@ -355,7 +357,7 @@ $("#searchBtn").click(function () {
 
         $.ajax(settings).done(function (response) {
 
-            if (response.articles.length < 0) {
+            if (response.articles.length > 0) {
                 for (var i = 0; i < response.articles.length; i++) {
                 function addSearchResults() {
 
