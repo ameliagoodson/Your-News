@@ -231,25 +231,30 @@ $.ajax(settings).done(function (response) {
                 
                 //Excerpt div 
                     var excerptDiv = $('<div>', {
-                        class: 'excerptDiv'
+                        class: 'covidDiv'
                     })
                     covidDiv.append(excerptDiv)
                 //Excerpt
                     var excerpt = $('<p>', {
-                        class: 'excerpt'
+                        class: 'covidExcerpt'
                     })
                     excerpt.text(response.news[i].excerpt)
                     excerptDiv.append(excerpt)
 
-                //Subheading
+                // Image
+                    var covidImgDiv = $('<div>', {
+                            class: 'covidImgDiv'
+                    })
+                    excerptDiv.append(covidImgDiv)
+                    
                     if (response.news[i].images != null) {
                     
                         var image = $("<img>",{
-                            class: "newsImage"
+                            class: "covidImage"
                         })
                         image.attr('src', response.news[i].images[0].url)
-                        excerptDiv.append(image)
-                }}
+                        covidImgDiv.append(image)
+                    }}
                 addSearchResults()
             }
 });

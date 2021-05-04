@@ -126,7 +126,7 @@ nav {
 }
 
 .sideNav {
-	height: fit-content;
+	max-height: fit-content;
 	width: 15%;
 	margin-left: 10px;
 	margin-right: 10px;
@@ -210,30 +210,43 @@ nav {
 }
 
 .excerptDiv {
-	display: flex;
 	justify-content: left;
 	padding: 10px 10px 20px 10px;
+	word-wrap: break-word;
 }
 .newsImage {
-	max-width: 50%;
+	max-width: 80%;
 	display: inline-block;
 	margin-left: 40px;
 }
-.imageDiv {
-	display: flex;
-	justify-content: center;
+.covidImage {
+	max-width: 80%;
+	display: inline-block;
+	margin-bottom: 10px;
 }
 .searchImage {
 	max-width: 80%;
 	padding: 10px;
-	max-height: 150px;
 }
+.imageDiv,
+.covidImgDiv {
+	display: flex;
+	justify-content: center;
+}
+
 .excerpt {
 	display: inline-block;
 	max-width: 50%;
+	word-wrap: break-word;
 }
 .excerptLang {
-	display: inline-block;
+	justify-content: left;
+	padding: 10px 10px 20px 10px;
+	word-wrap: break-word;
+}
+.covidImgDiv {
+	justify-content: center;
+	display: flex;
 }
 /* Weather and local headlines*/
 #rightDiv {
@@ -292,16 +305,16 @@ nav {
 
 .tempClass {
 	background-color: white;
-	margin-top: 8px;
+	margin-top: 4px;
 	min-width: 60px;
 }
 .conditionClass {
-	margin-top: 8px;
+	margin-top: 4px;
 	margin-left: 5px;
 }
 .iconClass {
 	background-color: white;
-	height: 40px;
+	height: 35px;
 }
 
 /* Central weather div (for mobiles/tablets) */
@@ -374,7 +387,7 @@ nav {
 		width: 100%;
 		display: flex;
 		border-bottom: var(--lightGrey) 1px solid;
-		height: 40px;
+		height: 35px;
 	}
 	#weatherSchC {
 		display: flex;
@@ -396,7 +409,7 @@ nav {
 	}
 	#weatherBtnC {
 		border: none;
-		height: 40px;
+		height: 35px;
 		background-color: var(--juneBudLight);
 		margin-right: 20px;
 	}
@@ -422,6 +435,7 @@ nav {
 	#covidDiv {
 		display: none;
 	}
+
 	#nav-container {
 		display: flex;
 		justify-content: space-between;
@@ -465,6 +479,9 @@ nav {
 
 /* Mobile devices */
 @media (max-width: 480px) {
+	.logo {
+		height: 4vh;
+	}
 	#title {
 		font-size: 16px;
 	}
@@ -475,13 +492,32 @@ nav {
 		margin-bottom: 0px;
 		padding: 5px !important;
 	}
-	.covidBtn,
-	#mainNav.li {
-		font-size: 16px;
+	#nav-container {
+		position: relative;
+	}
+	#covidNav {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 30px;
 	}
 
+	.covidBtn,
+	#mainNav.li {
+		font-size: 12px;
+	}
+	#navbar {
+		height: 8vh;
+	}
+
+	.covidImage {
+		max-width: 100%;
+	}
 	.newsImage {
-		width: 100%;
+		max-width: 100%;
+	}
+	.searchImage {
+		max-width: 100%;
 	}
 
 	.flex-container {
@@ -500,6 +536,14 @@ nav {
 	}
 	.iconClass {
 		display: none;
+	}
+	#headingDiv {
+		font-size: 16px;
+	}
+
+	.excerpt {
+		max-width: 100%;
+		display: block;
 	}
 }
 /* Very small mobiles */
